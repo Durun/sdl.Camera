@@ -9,21 +9,26 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
     private var photoImage: Bitmap? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        photo_button.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            // TODO: You should setup appropriate parameters for the intent
-            val activity: ComponentName? = intent.resolveActivity(packageManager)
-            activity?.let {
-                startActivityForResult(intent, REQ_PHOTO)
-            } ?: run {
-                Toast.makeText(this@MainActivity, R.string.toast_no_activities, Toast.LENGTH_LONG).show()
-            }
+
+        photo_button.setOnClickListener { takePhoto() }
+    }
+
+    private fun takePhoto() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        // TODO: You should setup appropriate parameters for the intent
+        val activity: ComponentName? = intent.resolveActivity(packageManager)
+        activity?.let {
+            startActivityForResult(intent, REQ_PHOTO)
+        } ?: run {
+            Toast.makeText(this@MainActivity, R.string.toast_no_activities, Toast.LENGTH_LONG).show()
         }
     }
 
