@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(reqCode: Int, resCode: Int, data: Intent?) {
         super.onActivityResult(reqCode, resCode, data)
-        if ((reqCode == REQ_PHOTO) && (resCode == Activity.RESULT_OK)) {
+        when(reqCode){
             // TODO: You should implement the code that retrieve a bitmap image
-            loadPhoto()
+            REQ_PHOTO -> if (resCode == Activity.RESULT_OK) { loadPhoto() }
         }
     }
 
