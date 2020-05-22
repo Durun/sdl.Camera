@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,21 +28,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showPhoto() {
-        if (photoImage == null) {
-            return
+        photoImage?.let {
+            photo_view.setImageBitmap(photoImage)
         }
-        val photoView = findViewById<ImageView>(R.id.photo_view)
-        photoView.setImageBitmap(photoImage)
     }
 
     override fun onActivityResult(reqCode: Int, resCode: Int, data: Intent?) {
         super.onActivityResult(reqCode, resCode, data)
-        if (reqCode == REQ_PHOTO) {
-            if (resCode == Activity.RESULT_OK) {
-                // TODO: You should implement the code that retrieve a bitmap image
-                photoImage = data?.let {
-                    it.extras?.get("data") as Bitmap
-                }
+        if ((reqCode == REQ_PHOTO) && (resCode == Activity.RESULT_OK)) {
+            // TODO: You should implement the code that retrieve a bitmap image
+            photoImage = data?.let {
+                it.extras?.get("data") as Bitmap
             }
         }
     }
