@@ -5,24 +5,21 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import jp.ac.titech.itpro.sdl.camera.MainActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val photoImage: Bitmap? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val photoButton = findViewById<Button>(R.id.photo_button)
-        photoButton.setOnClickListener {
+        photo_button.setOnClickListener {
             val intent = Intent()
             // TODO: You should setup appropriate parameters for the intent
-            val manager = packageManager
-            val activities: List<*> = manager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-            if (!activities.isEmpty()) {
+            val activities: List<*> = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+            if (activities.isNotEmpty()) {
                 startActivityForResult(intent, REQ_PHOTO)
             } else {
                 Toast.makeText(this@MainActivity, R.string.toast_no_activities, Toast.LENGTH_LONG).show()
