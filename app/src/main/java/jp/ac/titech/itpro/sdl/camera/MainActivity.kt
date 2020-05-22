@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val REQ_PHOTO = 1234
-        private const val PHOTO_FILE_PREFIX = "sample-photo"
+        private const val PHOTO_FILE_PREFIX = "temp-photo"
         private const val FILEPROVIDER_AUTHORITY = "jp.ac.titech.itpro.sdl.camera.fileprovider"
     }
 }
